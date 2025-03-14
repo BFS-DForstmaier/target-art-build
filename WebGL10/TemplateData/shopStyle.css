@@ -1,0 +1,327 @@
+
+a {
+    color: #E9CA70;
+}
+#shop-layout, #shop-modal {
+    position: relative;
+    height: 650px;
+    background-color: #430;
+    padding: 20px;
+    border: 2px solid #000;
+    color: #E9CA70;
+    z-index: 0;
+}
+#shop-modal {
+    display: block;
+    background-color: #000;
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px
+}
+.modal-close-button {
+    display: none;
+}
+#shop-countries {
+    padding: 0 10px;
+    position: absolute;
+    top: 180px;
+    display: none;
+}
+#shop-products {
+    display: none;
+}
+#cart-layout {
+    position: absolute;
+    top: 22px;
+    height: 50px;
+    left: 0;
+    width: 100%;
+}
+#shop-methods {
+    position: absolute;
+    top: 50px;
+}
+#shop-cart .product {
+    display:block !important;
+    height: 40px;
+    /* background-color:rgba(0,0,0,0.1); */
+    border-radius:10px;
+    position: absolute;
+    width: 100%;
+}
+#shop-cart .product-name {
+    position:absolute;
+    top:10px;
+    left:10px;
+    font-size: 24px;
+    font-weight:bold;
+}
+#shop-cart .product-item-price {
+    display:none
+}
+#shop-cart .product-quantity {
+    display:none
+}
+#shop-cart .product-price {
+    display: none;
+}
+#shop-cart .product-remove {display: none;}
+#shop-cart .product-remove:hover {
+    filter:brightness(1.25);
+    opacity:1
+}
+#shop-cart .product-remove::before {
+    content:"x";
+    font-size:24px;
+    color:#fff;
+    position:absolute;
+    top: 2px;
+    left: 10px;
+    font-weight:bold;
+    opacity:.8;
+}
+.cart-product {
+    /* display:block !important */
+}
+.cart-summary {
+    position:absolute;
+    left: 0;
+    width: 100%;
+    padding:10px;
+    top: 40px;
+    color: #EEE8CA;
+    line-height: 1.5em;
+    font-size: 16px;
+}
+.cart-summary div {
+    display:block !important;
+    text-align:right;
+    position:relative;
+    width: calc(100% - 10px);
+}
+.cart-summary .cart-total-vat {
+    font-weight: bold;
+}
+.cart-summary span {
+    opacity:.8;
+    position:absolute;
+    left:0
+}
+.empty-cart {
+    padding:14px;
+    font-size:18px;
+    opacity:.5
+}
+.shop-cart-title {
+    width:100%;
+    position:absolute;
+    top:10px;
+    left:20px;
+    padding:2px 8px;
+    font-size:24px;
+    font-weight:bold;
+    display: none;
+}
+.legal-remark {
+    position: absolute;
+    top: 145px;
+    right: 20px;
+    opacity:.8;
+    font-size: 10px;
+    width: 250px;
+    text-align: right;
+    color: #EEE8CA;
+}
+.shop-cart-payment-method {
+    display:block !important;
+    font-size:14px;
+    position:absolute;
+    top: 410px;
+    left: 0;
+    width: 100%;
+    margin:0 !important;
+    text-align: left;
+    opacity:.8;
+    padding: 10px;
+    color: #9AFF49;
+    text-shadow: 0 1px 1px black, 0 -1px 1px black, 1px 0 1px black, -1px 0 1px black;
+}
+#shop-methods {
+    display:block;
+    position: absolute;
+    left: 0;
+    top: 200px;
+    width: 100%;
+    max-height: 235px;
+    overflow:auto;
+    overflow-x:hidden;
+    padding:0px;
+    padding-top:40px;
+    box-sizing:border-box;
+    display:flex !important;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+.methods-title {
+    width: 100%;
+    position:absolute;
+    top: 5px;
+    left: 0;
+    padding:2px 8px;
+    font-size:24px;
+    font-weight:bold;
+    margin: 0;
+    text-align: left;
+}
+.methods-icon {
+    height: 100%;
+    width: auto;
+    max-height: 35px;
+    max-width:100%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+.methods-name {
+    background-color:rgba(255,255,255,0.8) !important;
+    color:#333;
+    position:absolute;
+    bottom: 5px;
+    left:0;
+    width:100%;
+    height: 14px;
+    text-align:center;
+    font-size: 14px;
+    text-shadow:#fff 0 0 5px;
+    font-weight:bold;
+}
+.methods-name p {
+    margin: 0;
+}
+.payment-method {
+    position:relative;
+    text-align:center;
+    background-color:#fff !important;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    transform: scale(0.9);
+    width: calc(50% - 10px);
+    transition:all .25s;
+    box-sizing:border-box;
+    border:5px solid transparent;
+    opacity:.9;
+    height: 61px;
+}
+.payment-method:hover {
+    opacity:.8
+}
+.payment-method.defect {
+    opacity: 0.3;
+}
+.payment-method.active {
+    transform:scale(1);
+    border: 5px solid rgba(155, 255, 75, 0.8);
+    opacity:1;
+}
+.payment-method.active::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    background-color: rgba(100,255,100,0.15);
+}
+.btn,
+button {
+    border-radius:10px;
+    padding:10px 20px;
+    transition:.25s;
+    box-sizing:border-box;
+    width:120px;
+    height:40px;
+}
+.btn:hover,
+button:hover {
+    background-color:#3c8aad
+}
+.withdrawal {
+    display:block;
+    position: absolute;
+    left: 0;
+    bottom: 125px;
+    width: 100%;
+    height: 40px;
+    box-sizing:border-box;
+    font-size:16px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+    color: #EEE8CA;
+}
+.withdrawal input {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    box-shadow: inset 0 0 5px black;
+    vertical-align: middle;
+}
+.withdrawal label{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: calc(100% - 50px);
+}
+
+@media (max-height:600px) {
+    .withdrawal-checkbox {
+        padding:10px;
+        font-size:14px
+    }
+}
+@media (max-height:450px) {
+    .withdrawal-checkbox {
+        padding:0;
+        font-size:10px;
+        overflow:visible
+    }
+}
+.product-pay.btn:not(.disabled) {
+    cursor: pointer;
+}
+.product-pay.btn {
+    display:block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: calc(100%);
+    height: 90px;
+    box-sizing:border-box;
+    font-size: 24px;
+    overflow:hidden;
+    padding:5px;
+    border-radius: 0;
+    color: #fff;
+    font-weight: bold;
+    background-color: transparent;
+    text-shadow: black 0 1px 5px;
+
+}
+.product-pay.btn::before {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    content: ' ';
+    z-index: -1;
+}
+.product-pay.btn.disabled::before {
+    opacity: 0.5;
+}
+.product-pay.btn.disabled {
+    opacity:.5;
+}

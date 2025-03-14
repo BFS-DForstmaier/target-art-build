@@ -1,0 +1,18 @@
+.gleap-frame-container {
+	bottom: 104px !important;	
+	right: 35px !important;
+}
+
+.gleap-frame-container--no-button {
+    bottom: 104px !important;
+	right: 35px !important;
+}
+
+.bb-feedback-button--bottomleft {
+	bottom: 20px !important;
+	left: 20px !important;
+}
+
+.bb-feedback-button-icon {
+	user-select: none;
+}

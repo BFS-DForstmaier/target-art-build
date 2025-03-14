@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <!-- Deactivating Sentry until we utilize it.
+    <script src="https://browser.sentry-cdn.com/5.5.0/bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script>
+      Sentry.init({ dsn: 'https://5133ef5c08964cdbba2eda6c9ef6a51a@sentry.bf-cloud.de/16' });
+    </script>
+    -->
+
+    <!-- Favicon. -->
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- General Data. -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PortLibertyTargetArt</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="TemplateData/shopStyle.css">
+    <link rel="stylesheet" href="TemplateData/gleapStyle.css">
+</head>
+
+<!-- Unity. -->
+<body class="dark">
+<div id="unity-container" class="unity-desktop">
+    <canvas id="unity-canvas"></canvas>
+</div>
+<div id="loading-cover" style="display:none;">
+    <div id="unity-loading-bar">
+        <div id="unity-logo"><img src="logo.png"></div>
+        <div id="unity-progress-bar-empty" style="display: none;">
+            <div id="unity-progress-bar-full"></div>
+        </div>
+        <div class="spinner"></div>
+    </div>
+</div>
+<div id="unity-fullscreen-button" style="display: none;"></div>
+<script>
+    let pipeline = "{{PIPELINE}}";
+    if (pipeline.includes("{{")) {
+        pipeline = "-1";
+    }
+
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/WebGL10.loader.js?v=" + pipeline;
+    const config = {
+        dataUrl: buildUrl + "/WebGL10.data?v=" + pipeline,
+        frameworkUrl: buildUrl + "/WebGL10.framework.js?v=" + pipeline,
+        codeUrl: buildUrl + "/WebGL10.wasm?v=" + pipeline,
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "PortLibertyTargetArt",
+        productVersion: "0.1.0",
+    };
+
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+    const spinner = document.querySelector('.spinner');
+
+    const canFullscreen = (function () {
+        for (const key of [
+            'exitFullscreen',
+            'webkitExitFullscreen',
+            'webkitCancelFullScreen',
+            'mozCancelFullScreen',
+            'msExitFullscreen',
+        ]) {
+            if (key in document) {
+                return true;
+            }
+        }
+        return false;
+    }());
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+    }
+    config.devicePixelRatio = 1;
+
+    loadingCover.style.display = "";
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+            spinner.style.display = "none";
+            progressBarEmpty.style.display = "";
+            progressBarFull.style.width = `${100 * progress}%`;
+        }).then((unityInstance) => {
+            window.unityInstance = unityInstance;
+            loadingCover.style.display = "none";
+            // Emulate a "page view" every minute for Gleap so we could push messages
+            window.setInterval(() => {
+                Gleap.trackEvent("pageView", {
+                    page: "Example page",
+                });
+            }, 60000);
+            if (canFullscreen) {
+                fullscreenButton.onclick = () => {
+                    unityInstance.SetFullscreen(1);
+                };
+            }
+        }).catch((message) => {
+            alert(message);
+        });
+    };
+    document.body.appendChild(script);
+</script>
+<input type='text' class='textToCopy' id="textToCopy" style="display: block;position:fixed;top: 100%;left: 0;opacity: 0;z-index: 0;"/>
+</body>
+</html>
